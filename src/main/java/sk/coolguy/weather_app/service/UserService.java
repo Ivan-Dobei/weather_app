@@ -17,9 +17,10 @@ public class UserService {
         this.userDAO = userDAO;
     }
 
-    public void registration(@NonNull User user) {
+    public void registration(@NonNull User user) throws UserAlreadyExistsException {
         if(userDAO.findUserByUsername(user.getUsername()) == null) {
             userDAO.createUser(user);
+            return;
         }
         throw new UserAlreadyExistsException("User with this nickname already exists!");
     }
