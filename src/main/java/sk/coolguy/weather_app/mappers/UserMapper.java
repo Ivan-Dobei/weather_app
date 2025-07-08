@@ -1,4 +1,4 @@
-package sk.coolguy.weather_app.dao;
+package sk.coolguy.weather_app.mappers;
 
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;

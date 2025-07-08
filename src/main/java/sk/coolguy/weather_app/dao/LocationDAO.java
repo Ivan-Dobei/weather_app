@@ -4,7 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
-import sk.coolguy.weather_app.entity.Locations;
+import sk.coolguy.weather_app.entity.Location;
+import sk.coolguy.weather_app.mappers.LocationMapper;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,19 +20,19 @@ public class LocationDAO {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public Locations findLocationByName(String name) {
+    public Location findLocationByName(String name) {
         String sql = "select * from locations where name = ?";
         return jdbcTemplate.query(sql, new Object[]{name}, new LocationMapper()).stream().findFirst().orElse(null);
     }
 
-    public List<Locations> findLocationsByUserId(int userId) {
+    public List<Location> findLocationsByUserId(int userId) {
         String sql = "select * from locations where userid = ?";
 
         return jdbcTemplate.query(sql, new Object[]{userId}, new LocationMapper())
                 .stream().collect(Collectors.toList());
     }
 
-    public void createLocation(@NonNull Locations location) {
+    public void createLocation(@NonNull Location location) {
         String sql = "insert into locations (id, name, latitude, longitude, userId) values (?, ?, ?, ?, ?)";
 
         Object[] values = new Object[] {

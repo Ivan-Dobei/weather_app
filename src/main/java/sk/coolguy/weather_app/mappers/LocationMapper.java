@@ -1,18 +1,18 @@
-package sk.coolguy.weather_app.dao;
+package sk.coolguy.weather_app.mappers;
 
 import org.springframework.jdbc.core.RowMapper;
-import sk.coolguy.weather_app.entity.Locations;
+import sk.coolguy.weather_app.entity.Location;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class LocationMapper implements RowMapper<Locations> {
+public class LocationMapper implements RowMapper<Location> {
 
 
     @Override
-    public Locations mapRow(ResultSet rs, int rowNum) throws SQLException {
+    public Location mapRow(ResultSet rs, int rowNum) throws SQLException {
 
-        Locations location = new Locations();
+        Location location = new Location();
 
         location.setId(rs.getInt("id"));
         location.setName(rs.getString("name"));

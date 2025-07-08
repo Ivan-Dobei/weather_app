@@ -6,7 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Locations {
+public class Location {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -17,7 +17,7 @@ public class Locations {
     private double longitude;
     private int userId;
 
-    public Locations() {}
+    public Location() {}
 
     public int getId() {
         return id;

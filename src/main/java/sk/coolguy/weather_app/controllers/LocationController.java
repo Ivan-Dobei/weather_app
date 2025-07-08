@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sk.coolguy.weather_app.dao.LocationDAO;
-import sk.coolguy.weather_app.entity.Locations;
+import sk.coolguy.weather_app.entity.Location;
 import sk.coolguy.weather_app.exeptions.ErrorResponse;
 import sk.coolguy.weather_app.exeptions.LocationAlreadyExistsException;
 import sk.coolguy.weather_app.exeptions.LocationWasNotFoundException;
@@ -30,7 +30,7 @@ public class LocationController {
     @GetMapping("/{name}")
     public ResponseEntity<?> getLocationByName(@PathVariable("name") String name) {
         try {
-            Locations location = this.locationService.getLocationByName(name);
+            Location location = this.locationService.getLocationByName(name);
             return new ResponseEntity<>(location, HttpStatus.OK);
 
         } catch (LocationWasNotFoundException e) {
@@ -43,7 +43,7 @@ public class LocationController {
     @GetMapping("/user/{id}")
     public ResponseEntity<?> getLocationByUserId(@PathVariable("id") int userId){
         try {
-            List<Locations> locations = this.locationService.getLocationsByUserId(userId);
+            List<Location> locations = this.locationService.getLocationsByUserId(userId);
             return new ResponseEntity<>(locations, HttpStatus.OK);
         } catch (UserWasNotFoundException e) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(new ErrorResponse(e.getMessage()));
@@ -53,7 +53,7 @@ public class LocationController {
     }
 
     @PostMapping()
-    public ResponseEntity<?> addLocation(@RequestBody Locations location) {
+    public ResponseEntity<?> addLocation(@RequestBody Location location) {
         try {
             this.locationService.createLocation(location);
             return new ResponseEntity<>(location, HttpStatus.CREATED);

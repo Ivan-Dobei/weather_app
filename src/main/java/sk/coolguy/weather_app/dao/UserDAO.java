@@ -5,6 +5,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 import sk.coolguy.weather_app.entity.User;
+import sk.coolguy.weather_app.mappers.UserMapper;
 
 @Component
 public class UserDAO {
@@ -32,8 +33,10 @@ public class UserDAO {
     public void createUser(@NonNull User user) {
         String sql = "insert into users (id, username, email, password) values (?, ?, ?, ?)";
 
+        User newUser = new User();
+
         Object[] params = new Object[]{
-                user.getId(),
+                newUser.getId(),
                 user.getUsername(),
                 user.getEmail(),
                 user.getPassword()
